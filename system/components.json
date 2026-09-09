@@ -1,0 +1,415 @@
+{
+  "components": {
+
+    "introduction": {
+      "type": "text",
+      "description": "Opens the email. Sets context, states what is being announced, and gives the reader a reason to keep reading.",
+      "min_sentences": 3,
+      "max_sentences": 5,
+      "rules": [
+        "First sentence must state the course name or topic and its single most compelling benefit",
+        "Follow with 2–3 sentences that expand on why this matters to the reader right now",
+        "Close with a transition that leads naturally into the next component",
+        "Do not use a generic opener like 'We are excited to announce'",
+        "No bullet points — prose only",
+        "Write at least 60 words"
+      ]
+    },
+
+    "hook": {
+      "type": "text",
+      "description": "Grabs attention immediately. Used instead of introduction when urgency or a trend is the lead.",
+      "min_sentences": 2,
+      "max_sentences": 3,
+      "rules": [
+        "Must create immediate relevance — reference a trend, a stat, a deadline, or a bold statement",
+        "Second sentence should deepen the hook — add context or a surprising detail",
+        "Third sentence (optional) bridges to the offer or course",
+        "No fluff — every word must earn its place",
+        "No bullet points — prose only",
+        "Write at least 40 words"
+      ]
+    },
+
+    "story": {
+      "type": "text",
+      "description": "Builds context or emotional connection. Bridges the hook to the offer.",
+      "min_sentences": 4,
+      "max_sentences": 6,
+      "rules": [
+        "Open by establishing the real-world situation or trend",
+        "Build toward the reader's position — where are they now, what problem do they have?",
+        "Show how the course or offer is the natural next step",
+        "Close by transitioning to the offer, project list, or CTA",
+        "Write in second person — address the reader directly",
+        "No bullet points — prose only",
+        "Write at least 80 words"
+      ]
+    },
+
+    "announcement": {
+      "type": "text",
+      "description": "A direct, factual statement of what is new. Used for updates that need no sell.",
+      "min_sentences": 2,
+      "max_sentences": 4,
+      "rules": [
+        "First sentence states what is new and when it is available",
+        "Follow with 1–2 sentences giving the key details — what it covers, what the student gets",
+        "Final sentence tells the reader where to find it or what to do next",
+        "No hype — factual and clear",
+        "Write at least 40 words"
+      ]
+    },
+
+    "hero_image": {
+      "type": "visual",
+      "description": "The primary course banner image displayed at the top of the email.",
+      "rules": [
+        "Use the course banner from assets/images/banners/",
+        "Preferred file: hero_banner.png",
+        "Always include alt text equal to the course name"
+      ],
+      "output_fields": {
+        "asset": "path to image file",
+        "alt_text": "course name"
+      }
+    },
+
+    "course_image": {
+      "type": "visual",
+      "description": "A supporting course image — used in sale and update emails where a full hero is not needed.",
+      "rules": [
+        "Use a pricing card or secondary banner from assets/images/",
+        "Smaller visual weight than hero_image — this is supporting, not primary"
+      ],
+      "output_fields": {
+        "asset": "path to image file",
+        "alt_text": "short description of image"
+      }
+    },
+
+    "thumbnail_image": {
+      "type": "visual",
+      "description": "A video thumbnail shown in youtube_promotion emails. Renders with rounded corners. Do not include any play button overlays.",
+      "rules": [
+        "Always wrap the image in a div with position:relative, border-radius:12px, overflow:hidden, and line-height:0",
+        "Always apply 24px left and right padding on the outer cell so the rounded corners are visible against the email background",
+        "Always link the entire block to the YouTube video URL",
+        "Never overlay a play button.",
+        "Always include a one-line caption below the image in font-size:12px; color:#AAAAAA; text-align:center"
+      ],
+      "html_format": "<td style=\"padding:0 24px 4px 24px;\">\n  <a href=\"{video_url}\" style=\"display:block; text-decoration:none;\">\n    <div style=\"position:relative; border-radius:12px; overflow:hidden; line-height:0; display:block;\">\n      <img src=\"{asset}\" width=\"552\" alt=\"{alt_text}\" style=\"display:block; width:100%; border:0;\" />\n    </div>\n  </a>\n</td>",
+      "output_fields": {
+        "asset": "path to thumbnail image file",
+        "alt_text": "video title",
+        "video_url": "full YouTube video URL",
+        "caption": "one sentence describing the video"
+      }
+    },
+
+    "gif_demo": {
+      "type": "visual",
+      "description": "An animated GIF showing a project from the course in action.",
+      "rules": [
+        "Always use files from assets/gifs/ — never from assets/videos/",
+        "Pick the most visually impressive demo available in that folder",
+        "Prefer a demo that shows the end result, not the process",
+        "Include a one-line caption describing what is being shown",
+        "Use a standard img tag — never a video tag"
+      ],
+      "output_fields": {
+        "asset": "path to .gif file inside assets/gifs/",
+        "caption": "one sentence describing the demo"
+      }
+    },
+
+    "code_screenshot": {
+      "type": "visual",
+      "description": "A screenshot showing a key or interesting piece of code from the lesson.",
+      "rules": [
+        "Only use if the code snippet is visually clean and short enough to be readable in an email",
+        "Include a one-line caption explaining what the code does"
+      ],
+      "output_fields": {
+        "asset": "path to image file",
+        "caption": "one sentence describing what the code does"
+      }
+    },
+
+    "meme": {
+      "type": "api_visual",
+      "description": "A relevant GIF or meme fetched from KLIPY based on the campaign mood. Used to add personality, humor, and emotional tone to an email.",
+      "api": {
+        "service": "KLIPY",
+        "docs": "https://docs.klipy.com",
+        "gif_search_endpoint": "GET https://api.klipy.com/api/v1/JapAWnQgeOtoBdIHXxkNsJ6MYhSD4bw29zuJiuEyMZ9mmuMmLnqbQrCxEXh7fJCx/gifs/search?q={query}&limit=10",
+        "meme_search_endpoint": "GET https://api.klipy.com/api/v1/JapAWnQgeOtoBdIHXxkNsJ6MYhSD4bw29zuJiuEyMZ9mmuMmLnqbQrCxEXh7fJCx/memes/search?q={query}&limit=10",
+        "auth": "API key embedded in the URL path — no header needed"
+      },
+      "mood_to_query_map": {
+        "sale_campaign": ["hurry up", "excited deal", "running out of time", "jumping excitement", "lets go"],
+        "course_launch": ["rocket launch", "lets go", "excited", "celebration", "mind blown"],
+        "lesson_announcement": ["new thing", "look at this", "check it out", "cool", "interesting"],
+        "one_day_left": ["hurry", "running clock", "almost out of time", "last chance"],
+        "last_chance": ["final countdown", "times up", "now or never", "run"],
+        "ai_robotics_update": ["robot", "future", "mind blown", "wow", "amazing technology"],
+        "bootcamp_enrollment": ["lets do this", "ready", "pumped", "team work", "high five"]
+      },
+      "rules": [
+        "Determine the campaign mood from the campaign type and email role",
+        "Use the mood_to_query_map to pick a search query — pick the most fitting one",
+        "Prefer the Meme API for humorous/relatable content — use GIF API for more animated/expressive content",
+        "Call the API, get the results, and pick the first result with a usable direct image URL",
+        "Use the medium or downsized format for email — never the original full size",
+        "Never use memes or GIFs that contain real named people or celebrities",
+        "Must be appropriate for a professional-but-casual audience — no crude or offensive content",
+        "Include a short caption below the image that ties it back to the email message",
+        "Save the selected item ID and URL in the campaign brief under the relevant email entry"
+      ],
+      "output_fields": {
+        "asset_url": "direct image URL from KLIPY response",
+        "caption": "one short sentence connecting the meme to the email message",
+        "klipy_id": "item id from response — save for reference"
+      },
+      "html_output": "See html_output pattern in AGENT_INSTRUCTIONS.md — centered img at 400px with caption below in #AAAAAA Arial 13px"
+    },
+
+    "what_you_will_learn": {
+      "type": "list",
+      "description": "A bullet list of specific skills the student will gain.",
+      "min_items": 4,
+      "max_items": 6,
+      "intro_sentence": true,
+      "rules": [
+        "Always open with one intro sentence before the list — e.g. 'Here is what you will be able to do by the end of this course:'",
+        "Each item must be a specific, concrete skill — not a vague outcome",
+        "Each item should be a full sentence, not a fragment — aim for 10–15 words per item",
+        "Start each item with a verb: 'Build', 'Deploy', 'Train', 'Connect', 'Create'",
+        "No item should repeat or overlap with another"
+      ],
+      "output_fields": {
+        "intro": "one sentence before the list",
+        "items": "array of strings"
+      }
+    },
+
+    "what_you_will_build": {
+      "type": "list",
+      "description": "A numbered list of real projects the student will build, displayed as blue numbered badge + bold project name + short gray description. Section label is 'What You Will Build' in blue uppercase.",
+      "min_items": 4,
+      "max_items": 8,
+      "rules": [
+        "Always render as a vertically stacked numbered list with blue badge icons — never as a prose list or plain bullets",
+        "Section label must be 'What You Will Build' in blue (#1A6DAF) uppercase letter-spacing",
+        "Follow the label with one bold intro sentence summarising the total count and scope of projects",
+        "Use the actual project names from the course_file.md — do not invent names",
+        "Each item has: a 22×22px blue (#1A6DAF) rounded (6px) number badge, a bold dark project name, and a 1-sentence gray description",
+        "Description is 10–15 words, color #777777, explaining what the project does and why it is impressive",
+        "Last item has padding-bottom:0 — all others have padding-bottom:14px"
+      ],
+      "html_format": {
+        "section_label": "<p style=\"font-family:Arial,sans-serif; font-size:11px; font-weight:bold; color:#1A6DAF; letter-spacing:2px; text-transform:uppercase; margin:0 0 12px;\">What You Will Build</p>",
+        "intro_sentence": "<p style=\"font-family:Arial,sans-serif; font-size:18px; font-weight:bold; color:#111111; margin:0 0 20px; line-height:1.3;\">{intro}</p>",
+        "outer_padding": "padding:36px 40px 32px",
+        "number_badge": "<div style=\"width:22px; height:22px; background-color:#1A6DAF; border-radius:6px; text-align:center; line-height:22px; font-family:Arial,sans-serif; font-size:11px; font-weight:bold; color:#ffffff;\">{n}</div>",
+        "badge_cell": "valign:top, width:28px, padding-top:3px, padding-right:12px",
+        "project_name": "<p style=\"font-family:Arial,sans-serif; font-size:14px; font-weight:bold; color:#111111; margin:0 0 2px;\">{name}</p>",
+        "project_description": "<p style=\"font-family:Arial,sans-serif; font-size:12px; color:#777777; margin:0; line-height:1.5;\">{description}</p>",
+        "item_cell_padding": "padding-bottom:14px (0 on last item)"
+      },
+      "output_fields": {
+        "intro": "one bold sentence with total project count and scope",
+        "items": "array of objects: { name, description }"
+      }
+    },
+
+    "features": {
+      "type": "list",
+      "description": "A bullet list of key selling points or course features.",
+      "min_items": 3,
+      "max_items": 5,
+      "rules": [
+        "Focus on what makes this course different — not generic benefits",
+        "Pull from the Key Benefits section of the course_file.md",
+        "Each item should be one line — no sub-bullets"
+      ],
+      "output_fields": {
+        "items": "array of strings"
+      }
+    },
+
+    "facts_numbers": {
+      "type": "list",
+      "description": "Social proof stats displayed as a 2-column icon grid. Section label is 'Why CVZone' in blue uppercase. Each stat has a blue rounded emoji icon, a bold title, and a short gray description.",
+      "min_items": 4,
+      "max_items": 4,
+      "rules": [
+        "Always render as a 2×2 grid of icon+title+description items — never as a prose list",
+        "Section label must always be 'Why CVZone' in blue (#1A6DAF) uppercase letter-spacing",
+        "Each item has: a 36×36px blue (#1A6DAF) rounded (8px) emoji icon box, a bold dark title, and a short gray description",
+        "Use real numbers only — from the course_file.md or brand_document.md social proof section",
+        "Each item title must be short and punchy — e.g. '80+ Countries', '#1 on Google', '1M+ Students', '100% Positive'",
+        "Description is 1 sentence max, color #777777"
+      ],
+      "html_format": {
+        "section_label": "<p style=\"font-family:Arial,sans-serif; font-size:11px; font-weight:bold; color:#1A6DAF; letter-spacing:2px; text-transform:uppercase; margin:0 0 20px;\">Why CVZone</p>",
+        "outer_padding": "padding:36px 40px 32px",
+        "grid": "2-column table, each cell width:50%. Left column padding-right:12px, right column padding-left:12px. Each row padding-bottom:18px.",
+        "icon_box": "<div style=\"width:36px; height:36px; background-color:#1A6DAF; border-radius:8px; text-align:center; line-height:36px; font-size:16px;\">{emoji}</div>",
+        "icon_cell": "valign:top, padding-right:12px, padding-top:2px",
+        "title": "<p style=\"font-family:Arial,sans-serif; font-size:14px; font-weight:bold; color:#111111; margin:0 0 3px;\">{title}</p>",
+        "description": "<p style=\"font-family:Arial,sans-serif; font-size:12px; color:#777777; margin:0; line-height:1.5;\">{description}</p>"
+      },
+      "output_fields": {
+        "items": "array of 4 objects: { emoji, title, description }"
+      }
+    },
+
+    "pricing": {
+      "type": "structured",
+      "description": "Displays course pricing as a row of individual cards — one card per tier. Section label is 'Sale Pricing' in blue uppercase. Each card shows plan name, strike-through original price, sale price, 'Save $X' in blue, a divider, and 2–3 feature lines with ✓ checkmarks. The most popular tier gets a blue border and a blue 'Most Popular' header band.",
+      "rules": [
+        "Appears ONCE per email as its own standalone section — NEVER embed pricing cards inside a cta block",
+        "Always render as individual side-by-side cards — never as a single bordered table",
+        "Section label must be 'Sale Pricing' in blue (#1A6DAF) uppercase letter-spacing",
+        "Follow with a subtitle: 'Choose your tier — all plans include lifetime access'",
+        "Each card: light gray background (#F8F8F8), border 1px solid #EEEEEE, border-radius 12px",
+        "Most popular card: border 2px solid #1A6DAF, blue (#1A6DAF) header band with '★ Most Popular' in white, plan name in blue instead of gray",
+        "Strike-through original price in #AAAAAA, sale price in #111111 at 28px bold, 'Save $X' in #1A6DAF bold",
+        "Feature divider: border-top 1px solid #EEEEEE, features in #777777 with ✓ prefix",
+        "Always show the coupon code if provided — display below the cards as: 'Use code {CODE} at checkout'",
+        "Always include: 'Lifetime access on all plans · 3-day money-back guarantee' below the cards",
+        "Always show original price alongside sale price"
+      ],
+      "html_format": {
+        "outer_padding": "padding:36px 40px 8px",
+        "section_label": "<p style=\"font-family:Arial,sans-serif; font-size:11px; font-weight:bold; color:#1A6DAF; letter-spacing:2px; text-transform:uppercase; margin:0 0 8px;\">Sale Pricing</p>",
+        "subtitle": "<p style=\"font-family:Arial,sans-serif; font-size:20px; font-weight:bold; color:#111111; margin:0 0 20px;\">Choose your tier — all plans include lifetime access</p>",
+        "card_standard": "background-color:#F8F8F8; border:1px solid #EEEEEE; border-radius:12px; overflow:hidden — inner padding:20px 18px 18px",
+        "card_popular": "background-color:#F8F8F8; border:2px solid #1A6DAF; border-radius:12px; overflow:hidden — blue header band + inner padding:16px 18px 18px",
+        "popular_band": "<td style=\"background-color:#1A6DAF; padding:6px 18px; text-align:center;\"><p style=\"font-family:Arial,sans-serif; font-size:10px; font-weight:bold; color:#ffffff; letter-spacing:1.5px; text-transform:uppercase; margin:0;\">★ Most Popular</p></td>",
+        "plan_name_standard": "<p style=\"font-family:Arial,sans-serif; font-size:11px; font-weight:bold; color:#888888; letter-spacing:1.5px; text-transform:uppercase; margin:0 0 10px;\">{name}</p>",
+        "plan_name_popular": "<p style=\"font-family:Arial,sans-serif; font-size:11px; font-weight:bold; color:#1A6DAF; letter-spacing:1.5px; text-transform:uppercase; margin:0 0 10px;\">{name}</p>",
+        "original_price": "<p style=\"font-family:Arial,sans-serif; font-size:12px; color:#AAAAAA; text-decoration:line-through; margin:0 0 4px;\">${original}</p>",
+        "sale_price": "<p style=\"font-family:Arial,sans-serif; font-size:28px; font-weight:bold; color:#111111; margin:0 0 4px;\">${sale}</p>",
+        "save_amount": "<p style=\"font-family:Arial,sans-serif; font-size:11px; color:#1A6DAF; font-weight:bold; margin:0 0 14px;\">Save ${saved}</p>",
+        "features": "<div style=\"border-top:1px solid #EEEEEE; padding-top:12px;\"><p style=\"font-family:Arial,sans-serif; font-size:11px; color:#777777; line-height:1.7; margin:0;\">✓ {feature1}<br>✓ {feature2}<br>✓ {feature3}</p></div>",
+        "below_cards_padding": "padding:16px 40px 32px text-align:center",
+        "coupon_line": "<p style=\"font-family:Arial,sans-serif; font-size:12px; color:#777777; margin:0 0 20px;\">Use code <strong style=\"color:#111111; background-color:#F0F0F0; padding:2px 8px; letter-spacing:1px;\">{CODE}</strong> at checkout &nbsp;·&nbsp; Lifetime access on all plans &nbsp;·&nbsp; 3-day money-back guarantee</p>"
+      },
+      "output_fields": {
+        "tiers": [
+          {
+            "name": "plan name",
+            "original_price": "number",
+            "current_price": "number",
+            "save_amount": "number",
+            "highlights": "array of 2–3 feature lines",
+            "is_popular": "boolean"
+          }
+        ],
+        "coupon_code": "string or null",
+        "includes_lifetime_access": true,
+        "refund_policy": "3-day money-back guarantee"
+      }
+    },
+
+    "cta": {
+      "type": "button",
+      "description": "A call to action button. May appear multiple times in one email — the same button text and URL is used each time, placed at different points to catch readers at different stages of engagement.",
+      "rules": [
+        "Text must be action-oriented — start with a verb",
+        "Link must go to the specific course page, not the homepage",
+        "Never use vague text like 'Click Here' or 'Submit'",
+        "Match the CTA text to the campaign type as defined in campaign_types.md",
+        "When the sequence includes two CTAs, both must use identical text and URL — do not vary the message",
+        "The final CTA in the email is always a standalone full-width button",
+        "For youtube_promotion campaigns, always use a red background (#CC4444) for the CTA button"
+      ],
+      "output_fields": {
+        "text": "button label",
+        "url": "full URL to destination"
+      }
+    },
+
+    "limited_time_offer": {
+      "type": "text",
+      "description": "An urgency block explaining the deadline and reinforcing the value of acting now.",
+      "min_sentences": 2,
+      "max_sentences": 4,
+      "rules": [
+        "Only generate this component if a real deadline or limit exists",
+        "First sentence states the exact end date or time of the offer",
+        "Follow with a sentence reinforcing what the reader gets if they act now",
+        "Optional: add a sentence about what happens after the deadline (price goes back up)",
+        "Do not manufacture urgency — if no deadline is provided, do not invent one",
+        "Write at least 35 words"
+      ]
+    },
+
+    "countdown": {
+      "type": "api_visual",
+      "description": "A live animated GIF countdown timer generated via the CountdownMail API. Updates on every email open.",
+      "api": {
+        "service": "CountdownMail",
+        "docs": "https://countdownmail.com/api-documentation",
+        "create_endpoint": "POST https://countdownmail.com/api/create",
+        "auth": "Authorization:BpNTFy6eZI_1JH-Kyz799ly4Hj2mqtAI",
+        "update_endpoint": "PUT https://countdownmail.com/api/update/{code}",
+        "delete_endpoint": "DELETE https://countdownmail.com/api/delete/{code}"
+      },
+      "rules": [
+        "Only include if the user provides a real end date — never invent a deadline",
+        "Always call the CountdownMail API to create the timer before writing the email HTML",
+        "Use the end_date from campaign_brief.md as the time_end value",
+        "Always use the exact color values defined in api_request_body — never change them",
+        "Always set expired_mes_on to 1 and expired_mes to 'This offer has expired'",
+        "Place immediately before the CTA component",
+        "Save the returned timer code in campaign_brief.md under Generation Log",
+        "Always wrap the img in the overflow:hidden div defined in html_output — this hides the CountdownMail attribution text"
+      ],
+      "api_request_body": {
+        "skin_id": 3,
+        "name": "campaign name from campaign_brief.md",
+        "time_end": "YYYY-MM-DD HH:MM:SS from campaign end date",
+        "time_zone": "use timezone provided by user, default UTC",
+        "font_family": "Roboto-Bold",
+        "color_primary": "CC4444",
+        "color_text": "FFFFFF",
+        "color_bg": "FFFFFF",
+        "transparent": 0,
+        "font_size": 38,
+        "lang": "en",
+        "expired_mes_on": 1,
+        "expired_mes": "This offer has expired",
+        "labels": 1,
+        "days": "days",
+        "hours": "hours",
+        "minutes": "minutes",
+        "seconds": "seconds"
+      },
+      "api_response": {
+        "id": "integer — save to campaign_brief.md",
+        "code": "string — save to campaign_brief.md",
+        "src": "GIF URL — use as img src in email HTML"
+      },
+      "html_output": "<section data-component=\"countdown\">\n  <p style=\"font-family:Arial,sans-serif; font-size:11px; font-weight:bold; color:#CC4444; letter-spacing:2px; text-transform:uppercase; margin:0 0 16px; text-align:center;\">Sale Ends In</p>\n  <div style=\"display:inline-block; overflow:hidden; max-width:400px; width:100%; max-height:72px; line-height:0;\">\n    <img src=\"{src from API response}\" width=\"400\" border=\"0\" alt=\"Sale ends soon\" style=\"width:100%; max-width:400px; display:block; margin:0 auto;\">\n  </div>\n</section>"
+    },
+
+    "bonus": {
+      "type": "list",
+      "description": "Extra items included with a purchase or bootcamp enrollment.",
+      "min_items": 1,
+      "max_items": 4,
+      "rules": [
+        "Only include if bonus items are explicitly provided by the user",
+        "Each item should name the bonus and its value in one line",
+        "Do not invent bonuses"
+      ],
+      "output_fields": {
+        "items": "array of strings"
+      }
+    }
+
+  }
+}

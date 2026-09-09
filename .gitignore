@@ -1,0 +1,26 @@
+# OS metadata & temporary files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+__MACOSX/
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Large media files (videos not embedded in HTML emails)
+*.mp4
+*.mov
+*.avi
+
+# Logs & temp
+*.log
+*.tmp
