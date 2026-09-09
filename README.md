@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![Computer Vision Zone](./assets/cvzone_logo.png)](https://www.computervision.zone/)
+[![Computer Vision Zone](assets/cvzone_logo.png)](https://www.computervision.zone/)
 
 [![Website](https://img.shields.io/badge/Platform-490K%2B_Users-blue?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.computervision.zone/)
 [![YouTube](https://img.shields.io/badge/YouTube-450K%2B_Subscribers-red?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/@murtazasworkshop)
@@ -14,55 +14,54 @@
 
 ---
 
-## 🥊 The Problem
+## ⚡ Problem vs. Solution
 
-Running multi-email marketing campaigns for a high-traffic technical education brand faces major failure points when using standard LLMs:
-
-* **Hallucination of Specs & Pricing:** Generic AI invents fake curriculum modules, non-existent stats, and inaccurate prices.
-* **Brand Voice Drift:** LLMs default to corporate filler (*"synergize", "unlock potential"*), violating Murtaza's direct, practical "learn-by-building" tone.
-* **Email Client Breakage:** Standard HTML output breaks across Outlook, Gmail, and Apple Mail due to unsupported CSS and divs.
-* **Campaign Fatigue:** Standard prompts repeat generic sales pitches across multi-day campaigns instead of rotating narrative angles.
-
----
-
-## 💡 The Solution
-
-A **deterministic AI campaign compiler** that treats campaign generation like software engineering:
-
-* **Zero-Hallucination Grounding:** Strictly references local course/product specification files (`course_file.md`).
-* **Rigid Component Grammar:** Enforced through [`components.json`](./system/components.json) dictating sentence counts, formatting, and forbidden vocabulary.
-* **Bulletproof HTML:** Generates table-based, inline-CSS, 600px responsive templates with hidden preheaders and CAN-SPAM compliance.
-* **Dynamic Psychological Sequencing:** Rotates through 9 distinct angles (Real-World Story, Career ROI, Problem $\rightarrow$ Solution, Demo Showcase, Pricing Deep Dive).
+| Challenge | ❌ Generic LLM Prompts | ✅ CVZone Campaign Agent |
+|:---|:---|:---|
+| **Accuracy & Pricing** | Hallucinates non-existent specs, features, and discount rates. | **Zero-Hallucination Grounding** constrained strictly to verified course specs (`course_file.md`). |
+| **Brand Voice** | Falls into corporate buzzwords (*"synergy", "unlock your potential"*). | **Persona Guardrails** enforcing Murtaza's practical, direct, "learn-by-building" tone. |
+| **HTML Deliverability** | Brittle CSS and div layouts that break across Outlook and Gmail. | **100% Client-Compatible** table-based inline CSS (600px) with hidden preheader hacks. |
+| **Pacing & Fatigue** | Repeats generic "buy now" sales pitches across multi-day blasts. | **9-Angle Narrative Sequencing** rotating through Real-World Stories, Demos, ROI, and Urgency. |
 
 ---
 
 ## 🎯 Core Use Cases
 
-| Use Case | Campaign Arc | Key Objective |
-|:---|:---|:---|
-| **Course Flash Sales** | 4–8 emails over 3–7 days (Announcement $\rightarrow$ Story/Value $\rightarrow$ 1-Day Left $\rightarrow$ Last Chance) | Drive high-urgency course conversions using real countdown timers and strike-through pricing without false scarcity. |
-| **Product Launches** | Benefit-first sequence (e.g. *PySimverse* Kickstarter) | Scale SaaS & developer tool sales by highlighting outcomes, founder pricing, and frictionless simulation. |
-| **YouTube Video Blasts** | Single curiosity-driven blast | Uses the "Curiosity Rule"—drives community traffic to YouTube releases without spoiling the conclusion in the email body. |
-| **Lesson Announcements** | Targeted educational update | Informs existing students of added modules with direct links and live demo GIF showcases. |
+| Scenario | Sequence Arc | Trigger & Focus |
+|:---|:---:|:---|
+| ⚡ **Course Flash Sales** | 4–8 emails (3–7 days) | High-urgency seasonal discounts with live CountdownMail timer sync and crossed-out pricing. |
+| 🚀 **Product Launches** | Multi-stage launch arc | Outcome-driven SaaS/developer tools (e.g., *PySimverse Kickstarter*) highlighting founder seats. |
+| 🎬 **YouTube Video Blasts** | Curiosity-driven single blast | Community traffic drivers using the "Curiosity Rule" (hooks without giving away the conclusion). |
+| 📢 **Lesson Announcements** | Single update release | Informs existing students of newly added CV/robotics modules with live project GIF previews. |
 
 ---
 
 ## ⚙️ Architecture & Workflow
 
-```text
-[User Request / Campaign Brief]
-             │
-             ▼
-[File Map Ingestion] ──► brand_document.md + components.json + course_file.md
-             │
-             ▼
-[Subject Line Generator] ──► 9-angle formula (<60 chars, approved before writing)
-             │
-             ▼
-[CountdownMail REST API] ──► Generates synchronized live GIF countdown timer
-             │
-             ▼
-[Deterministic HTML Compiler] ──► Generates 01_announcement.html ... 08_last_chance.html
+```mermaid
+flowchart LR
+    subgraph Ingestion ["1. Context Ingestion"]
+        A[Campaign Brief] --> B[Brand Rules &<br>components.json]
+        A --> C[Ground Truth Specs<br>course_file.md]
+    end
+
+    subgraph Generation ["2. Strategy & Timing"]
+        B & C --> D[Subject Line Engine<br>9-Angle Formulas]
+        D --> E[CountdownMail API<br>Live GIF Sync]
+    end
+
+    subgraph Compilation ["3. Email Compilation"]
+        E --> F[Deterministic HTML Compiler<br>Table Layouts & Inline CSS]
+    end
+
+    subgraph Output ["4. Deliverables"]
+        F --> G[Production Suite<br>01_announcement.html<br>to 08_last_chance.html]
+    end
+
+    style Ingestion fill:#f8fafc,stroke:#cbd5e1
+    style Generation fill:#f1f5f9,stroke:#94a3b8
+    style Compilation fill:#0f172a,stroke:#0f172a,color:#ffffff
+    style Output fill:#15803d,stroke:#15803d,color:#ffffff
 ```
 
 ---
@@ -75,7 +74,7 @@ Below is an authentic sample of an announcement email (**`01_announcement.html`*
 
 <div align="center">
 
-[![Computer Vision Zone](./assets/cvzone_logo.png)](https://www.computervision.zone/)
+[![Computer Vision Zone](assets/cvzone_logo.png)](https://www.computervision.zone/)
 
 **COMPUTER VISION ZONE • SPECIAL FLASH SALE**
 
@@ -91,11 +90,9 @@ Security cameras are installed everywhere—yet 95% of them are completely passi
 
 The industry is rapidly shifting to **active edge AI analytics**, and companies are actively searching for developers who can build automated, real-time computer vision monitoring systems.
 
-<div align="center">
-
-![Computer Vision with CCTV Banner](./courses/cctv/assets/images/course_banner.png)
-
-</div>
+<p align="center">
+  <img src="courses/cctv/assets/images/course_banner.png" alt="Computer Vision with CCTV Banner" width="100%" />
+</p>
 
 ---
 
@@ -103,11 +100,9 @@ The industry is rapidly shifting to **active edge AI analytics**, and companies 
 
 In this course, you won't study dry theory. You will build **26 real-world commercial CCTV applications** from scratch:
 
-| ![Real-time Weapon Detection](./courses/cctv/assets/gifs/weapon_detection.gif) | ![Automatic License Plate Recognition](./courses/cctv/assets/gifs/license_plate.gif) |
-| :---: | :---: |
-| **Real-Time Threat & Weapon Detection** | **Automatic License Plate Recognition (ANPR)** |
-| ![Workplace & Elderly Fall Detection](./courses/cctv/assets/gifs/fall_detection.gif) | ![Store Footfall & Crowd Analysis](./courses/cctv/assets/gifs/customer_counter.gif) |
-| **Workplace & Elderly Fall Detection** | **Smart Retail Footfall & Customer Analytics** |
+| <img src="courses/cctv/assets/gifs/weapon_detection.gif" width="100%" alt="Real-time Weapon Detection" /><br><sub><b>Real-Time Threat & Weapon Detection</b></sub> | <img src="courses/cctv/assets/gifs/license_plate.gif" width="100%" alt="Automatic License Plate Recognition" /><br><sub><b>Automatic License Plate Recognition (ANPR)</b></sub> |
+|:---:|:---:|
+| <img src="courses/cctv/assets/gifs/fall_detection.gif" width="100%" alt="Workplace & Elderly Fall Detection" /><br><sub><b>Workplace & Elderly Fall Detection</b></sub> | <img src="courses/cctv/assets/gifs/customer_counter.gif" width="100%" alt="Store Footfall & Crowd Analysis" /><br><sub><b>Smart Retail Footfall & Customer Analytics</b></sub> |
 
 * **Hands-on Implementation:** Clean Python, OpenCV, and deep learning architectures.
 * **Modern GUI & Dashboard:** You don't just output terminal logs; you learn to build professional monitoring interfaces.
